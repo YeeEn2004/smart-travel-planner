@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import travelData from './data.json';
 
 // TypeScript interfaces for safety and code quality
