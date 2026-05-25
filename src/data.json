@@ -1,27 +1,26 @@
-
 [
   {
     "id": "spot-1",
     "name": "Petronas Twin Towers (KLCC)",
     "category": "attraction",
     "rating": 4.8,
-    "image": "https://images.unsplash.com/photo-1542856391-010fb87dcfed",
-    "description": "The world's tallest twin towers, offering breathtaking city views from the Skybridge.",
+    "image": "https://images.unsplash.com/photo-1542856391-010fb87dcfed?auto=format&fit=crop&w=600&q=80",
+    "description": "The world's tallest twin towers, offering breathtaking city views from the Skybridge and Observation Deck.",
     "mapsUrl": "https://maps.google.com/?q=Petronas+Twin+Towers",
     "nearbyRestaurants": [
       {
         "id": "rest-1a",
-        "name": "Mada Kwan's (Suria KLCC)",
+        "name": "Madam Kwan's (Suria KLCC)",
         "rating": 4.3,
-        "cuisine": "Malaysian",
-        "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38"
+        "cuisine": "Malaysian Heritage Food",
+        "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80"
       },
       {
         "id": "rest-1b",
         "name": "Kyochon 1991 (Suria KLCC)",
         "rating": 4.5,
         "cuisine": "Korean Fried Chicken",
-        "image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec"
+        "image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=400&q=80"
       }
     ]
   },
@@ -30,16 +29,91 @@
     "name": "Petaling Street (Chinatown)",
     "category": "attraction",
     "rating": 4.2,
-    "image": "https://images.unsplash.com/photo-1601042879364-f3947d3f9c16",
-    "description": "A bustling market district in KL famous for its vibrant street food, shopping, and heritage vibes.",
+    "image": "https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?auto=format&fit=crop&w=600&q=80",
+    "description": "A bustling market district famous for its vibrant street food stalls, shopping bargains, and deep cultural heritage.",
     "mapsUrl": "https://maps.google.com/?q=Petaling+Street",
     "nearbyRestaurants": [
       {
         "id": "rest-2a",
-        "name": "Merchant's Lane",
+        "name": "Merchant's Lane Cafe",
         "rating": 4.4,
-        "cuisine": "Cafe & Fusion",
-        "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24"
+        "cuisine": "Artisan Coffee & Local Fusion",
+        "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "rest-2b",
+        "name": "Koon Kee Wantan Mee",
+        "rating": 4.1,
+        "cuisine": "Legendary Local Noodles",
+        "image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  {
+    "id": "spot-3",
+    "name": "Batu Caves",
+    "category": "attraction",
+    "rating": 4.6,
+    "image": "https://images.unsplash.com/photo-1629117621151-50e82ec4f179?auto=format&fit=crop&w=600&q=80",
+    "description": "A majestic limestone hill featuring ancient cave temples and guarded by the iconic giant gold statue of Lord Murugan.",
+    "mapsUrl": "https://maps.google.com/?q=Batu+Caves",
+    "nearbyRestaurants": [
+      {
+        "id": "rest-3a",
+        "name": "Restoran Dhivya's Cafe",
+        "rating": 4.2,
+        "cuisine": "Authentic South Indian Banana Leaf",
+        "image": "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "rest-3b",
+        "name": "Pan Heong Restoran",
+        "rating": 4.3,
+        "cuisine": "Famous Sang Har Mee (Prawn Noodles)",
+        "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  {
+    "id": "spot-4",
+    "name": "Bukit Bintang (Pavilion KL)",
+    "category": "attraction",
+    "rating": 4.7,
+    "image": "https://images.unsplash.com/photo-1596422846543-75c6fc1f7f43?auto=format&fit=crop&w=600&q=80",
+    "description": "The trendiest fashion and entertainment district in town, packed with massive shopping malls and lively street performances.",
+    "mapsUrl": "https://maps.google.com/?q=Pavilion+Kuala+Lumpur",
+    "nearbyRestaurants": [
+      {
+        "id": "rest-4a",
+        "name": "Din Tai Fung (Pavilion)",
+        "rating": 4.6,
+        "cuisine": "World-Famous Xiao Long Bao",
+        "image": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "rest-4b",
+        "name": "Wong Ah Wah (Jalan Alor)",
+        "rating": 4.0,
+        "cuisine": "Iconic BBQ Chicken Wings & Street Food",
+        "image": "https://images.unsplash.com/photo-1527477396000-e2cb862f6fc4?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  {
+    "id": "spot-5",
+    "name": "Perdana Botanical Garden",
+    "category": "attraction",
+    "rating": 4.4,
+    "image": "https://images.unsplash.com/photo-1588880331179-bc9b93a8c5d8?auto=format&fit=crop&w=600&q=80",
+    "description": "KL's premier heritage park, offering peaceful lakes, lush green lawns, and beautiful botanical collections right in the city center.",
+    "mapsUrl": "https://maps.google.com/?q=Perdana+Botanical+Garden",
+    "nearbyRestaurants": [
+      {
+        "id": "rest-5a",
+        "name": "Hornbill Restaurant & Cafe",
+        "rating": 4.1,
+        "cuisine": "Tropical Dining amidst Bird Park Greens",
+        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
       }
     ]
   }
