@@ -1,0 +1,46 @@
+
+[
+  {
+    "id": "spot-1",
+    "name": "Petronas Twin Towers (KLCC)",
+    "category": "attraction",
+    "rating": 4.8,
+    "image": "https://images.unsplash.com/photo-1542856391-010fb87dcfed",
+    "description": "The world's tallest twin towers, offering breathtaking city views from the Skybridge.",
+    "mapsUrl": "https://maps.google.com/?q=Petronas+Twin+Towers",
+    "nearbyRestaurants": [
+      {
+        "id": "rest-1a",
+        "name": "Madam Kwan's (Suria KLCC)",
+        "rating": 4.3,
+        "cuisine": "Malaysian",
+        "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38"
+      },
+      {
+        "id": "rest-1b",
+        "name": "Kyochon 1991 (Suria KLCC)",
+        "rating": 4.5,
+        "cuisine": "Korean Fried Chicken",
+        "image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec"
+      }
+    ]
+  },
+  {
+    "id": "spot-2",
+    "name": "Petaling Street (Chinatown)",
+    "category": "attraction",
+    "rating": 4.2,
+    "image": "https://images.unsplash.com/photo-1601042879364-f3947d3f9c16",
+    "description": "A bustling market district in KL famous for its vibrant street food, shopping, and heritage vibes.",
+    "mapsUrl": "https://maps.google.com/?q=Petaling+Street",
+    "nearbyRestaurants": [
+      {
+        "id": "rest-2a",
+        "name": "Merchant's Lane",
+        "rating": 4.4,
+        "cuisine": "Cafe & Fusion",
+        "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24"
+      }
+    ]
+  }
+]
