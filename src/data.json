@@ -4,6 +4,9 @@
     "name": "Petronas Twin Towers & KLCC Park",
     "category": "attraction",
     "rating": 4.8,
+    "operatingHours": "9:00 AM - 9:00 PM (Closed Mondays)",
+    "lat": 3.1579,
+    "lng": 101.7116,
     "images": [
       "/images/klcc-1.jpg", 
       "/images/klcc-2.jpg", 
@@ -11,27 +14,20 @@
     ],
     "description": "The world's tallest twin towers. Great for ultra-wide angle photography, especially during the evening golden hour.",
     "mapsUrl": "https://maps.google.com/?q=Petronas+Twin+Towers",
+    "ticketUrl": "https://www.petronastwintowers.com.my/",
     "nearbyRestaurants": [
       {
         "id": "rest-1a",
         "name": "Madam Kwan's (Suria KLCC)",
         "rating": 4.3,
         "cuisine": "Malaysian Heritage Food",
+        "operatingHours": "10:00 AM - 10:00 PM",
+        "lat": 3.1582,
+        "lng": 101.7120,
         "images": [
           "/images/madam-kwans-1.jpg",
           "/images/madam-kwans-2.jpg",
           "/images/madam-kwans-3.jpg"
-        ]
-      },
-      {
-        "id": "rest-1b",
-        "name": "Kyochon 1991 (Suria KLCC)",
-        "rating": 4.5,
-        "cuisine": "Korean Fried Chicken",
-        "images": [
-          "/images/kyochon-1.jpg",
-          "/images/kyochon-2.jpg",
-          "/images/kyochon-3.jpg"
         ]
       }
     ]
@@ -41,6 +37,9 @@
     "name": "Petaling Street (Chinatown)",
     "category": "attraction",
     "rating": 4.4,
+    "operatingHours": "8:00 AM - 10:00 PM",
+    "lat": 3.1440,
+    "lng": 101.6981,
     "images": [
       "/images/petaling-1.jpg", 
       "/images/petaling-2.jpg", 
@@ -54,21 +53,13 @@
         "name": "Merchant's Lane Cafe",
         "rating": 4.4,
         "cuisine": "Artisan Coffee & Fusion",
+        "operatingHours": "11:30 AM - 9:30 PM (Closed Wednesdays)",
+        "lat": 3.1420,
+        "lng": 101.6980,
         "images": [
           "/images/merchants-lane-1.jpg",
           "/images/merchants-lane-2.jpg",
           "/images/merchants-lane-3.jpg"
-        ]
-      },
-      {
-        "id": "rest-2b",
-        "name": "Koon Kee Wantan Mee",
-        "rating": 4.2,
-        "cuisine": "Legendary Local Noodles",
-        "images": [
-          "/images/koon-kee-1.jpg",
-          "/images/koon-kee-2.jpg",
-          "/images/koon-kee-3.jpg"
         ]
       }
     ]
@@ -78,6 +69,9 @@
     "name": "Batu Caves",
     "category": "attraction",
     "rating": 4.6,
+    "operatingHours": "7:00 AM - 9:00 PM",
+    "lat": 3.2379,
+    "lng": 101.6833,
     "images": [
       "/images/batu-caves-1.jpg", 
       "/images/batu-caves-2.jpg", 
@@ -91,21 +85,13 @@
         "name": "Dhivya's Cafe",
         "rating": 4.2,
         "cuisine": "South Indian Banana Leaf",
+        "operatingHours": "8:00 AM - 10:00 PM",
+        "lat": 3.2370,
+        "lng": 101.6840,
         "images": [
           "/images/dhivyas-1.jpg",
           "/images/dhivyas-2.jpg",
           "/images/dhivyas-3.jpg"
-        ]
-      },
-      {
-        "id": "rest-3b",
-        "name": "Pan Heong Restoran",
-        "rating": 4.3,
-        "cuisine": "Famous Sang Har Mee",
-        "images": [
-          "/images/pan-heong-1.jpg",
-          "/images/pan-heong-2.jpg",
-          "/images/pan-heong-3.jpg"
         ]
       }
     ]
@@ -115,19 +101,25 @@
     "name": "Central Market (Pasar Seni)",
     "category": "attraction",
     "rating": 4.5,
+    "operatingHours": "10:00 AM - 8:00 PM",
+    "lat": 3.1454,
+    "lng": 101.6953,
     "images": [
       "/images/central-market-1.jpg", 
       "/images/central-market-2.jpg",
       "/images/central-market-3.jpg"
     ],
     "description": "KL's cultural hub for Malaysian arts, crafts, and souvenirs, housed in a beautiful Art Deco heritage building.",
-    "mapsUrl": "https://maps.google.com/?q=Pavilion+Kuala+Lumpur",
+    "mapsUrl": "https://maps.google.com/?q=Central+Market+Kuala+Lumpur",
     "nearbyRestaurants": [
       {
         "id": "rest-4a",
         "name": "Precious Old China",
         "rating": 4.3,
         "cuisine": "Authentic Nyonya Cuisine",
+        "operatingHours": "11:30 AM - 10:00 PM",
+        "lat": 3.1450,
+        "lng": 101.6950,
         "images": [
           "/images/precious-old-china-1.jpg",
           "/images/precious-old-china-2.jpg",
@@ -141,19 +133,25 @@
     "name": "Merdeka Square (Dataran Merdeka)",
     "category": "attraction",
     "rating": 4.6,
+    "operatingHours": "Open 24 Hours",
+    "lat": 3.1493,
+    "lng": 101.6934,
     "images": [
       "/images/merdeka-1.jpg", 
       "/images/merdeka-2.jpg",
       "/images/merdeka-3.jpg"
     ],
     "description": "The historic heart of KL, surrounded by stunning colonial architecture like the Sultan Abdul Samad Building.",
-    "mapsUrl": "https://maps.google.com/?q=Perdana+Botanical+Garden",
+    "mapsUrl": "https://maps.google.com/?q=Merdeka+Square",
     "nearbyRestaurants": [
       {
         "id": "rest-5a",
         "name": "Kafe Dian",
         "rating": 4.1,
         "cuisine": "Traditional Local Coffee",
+        "operatingHours": "8:00 AM - 10:00 PM",
+        "lat": 3.1485,
+        "lng": 101.6940,
         "images": [
           "/images/kafe-dian-1.jpg",
           "/images/kafe-dian-2.jpg",
@@ -167,13 +165,16 @@
     "name": "KL Tower (Menara KL)",
     "category": "attraction",
     "rating": 4.5,
+    "operatingHours": "9:00 AM - 10:00 PM",
+    "lat": 3.1528,
+    "lng": 101.7038,
     "images": [
       "/images/kl-tower-1.jpg", 
       "/images/kl-tower-2.jpg",
       "/images/kl-tower-3.jpg"
     ],
     "description": "Offers an incredible 360-degree panoramic view of the city from its open-air sky deck.",
-    "mapsUrl": "https://www.google.com/maps/place/?q=place_id",
+    "mapsUrl": "https://maps.google.com/?q=Menara+Kuala+Lumpur",
     "ticketUrl": "https://www.menarakl.com.my/",
     "nearbyRestaurants": [
       {
@@ -181,6 +182,9 @@
         "name": "ARAS Restaurant",
         "rating": 4.4,
         "cuisine": "Revolving Buffet in the Sky",
+        "operatingHours": "11:30 AM - 10:00 PM",
+        "lat": 3.1528,
+        "lng": 101.7038,
         "images": [
           "/images/aras-1.jpg",
           "/images/aras-2.jpg",
@@ -194,19 +198,25 @@
     "name": "Thean Hou Temple",
     "category": "attraction",
     "rating": 4.7,
+    "operatingHours": "8:00 AM - 10:00 PM",
+    "lat": 3.1216,
+    "lng": 101.6877,
     "images": [
       "/images/thean-hou-1.jpg", 
       "/images/thean-hou-2.jpg",
       "/images/thean-hou-3.jpg"
     ],
     "description": "One of the oldest and largest temples in Southeast Asia, known for its striking red pillars and sweeping roofs.",
-    "mapsUrl": "https://www.google.com/maps/place/?q=place_id:12345",
+    "mapsUrl": "https://maps.google.com/?q=Thean+Hou+Temple",
     "nearbyRestaurants": [
       {
         "id": "rest-7a",
         "name": "Robson Heights Seafood",
         "rating": 4.2,
         "cuisine": "Classic Chinese Seafood",
+        "operatingHours": "11:30 AM - 2:30 PM, 5:30 PM - 10:00 PM",
+        "lat": 3.1220,
+        "lng": 101.6880,
         "images": [
           "/images/robson-1.jpg",
           "/images/robson-2.jpg",
@@ -220,19 +230,25 @@
     "name": "Pink Mosque (Putra Mosque)",
     "category": "attraction",
     "rating": 4.8,
+    "operatingHours": "9:00 AM - 5:00 PM",
+    "lat": 2.9360,
+    "lng": 101.6889,
     "images": [
       "/images/pink-mosque-1.jpg", 
       "/images/pink-mosque-2.jpg",
       "/images/pink-mosque-3.jpg"
     ],
     "description": "A breathtaking rose-tinted mosque sitting beautifully on the edge of Putrajaya Lake.",
-    "mapsUrl": "https://www.google.com/maps/place/?q=place_id:YOUR_PLACE_ID",
+    "mapsUrl": "https://maps.google.com/?q=Putra+Mosque",
     "nearbyRestaurants": [
       {
         "id": "rest-8a",
         "name": "Souq Putrajaya",
         "rating": 4.0,
         "cuisine": "Diverse Local Food Court",
+        "operatingHours": "10:00 AM - 10:00 PM",
+        "lat": 2.9355,
+        "lng": 101.6890,
         "images": [
           "/images/souq-1.jpg",
           "/images/souq-2.jpg",
