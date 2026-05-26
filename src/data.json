@@ -1,11 +1,15 @@
 [
   {
     "id": "spot-1",
-    "name": "Petronas Twin Towers (KLCC)",
+    "name": "Petronas Twin Towers & KLCC Park",
     "category": "attraction",
     "rating": 4.8,
-    "image": "https://images.unsplash.com/photo-1542856391-010fb87dcfed?auto=format&fit=crop&w=600&q=80",
-    "description": "The world's tallest twin towers, offering breathtaking city views from the Skybridge and Observation Deck.",
+    "images": [
+      "/images/klcc-1.jpg", 
+      "/images/klcc-2.jpg", 
+      "/images/klcc-3.jpg"
+    ],
+    "description": "The world's tallest twin towers. Great for ultra-wide angle photography, especially during the evening golden hour.",
     "mapsUrl": "https://maps.google.com/?q=Petronas+Twin+Towers",
     "nearbyRestaurants": [
       {
@@ -13,14 +17,22 @@
         "name": "Madam Kwan's (Suria KLCC)",
         "rating": 4.3,
         "cuisine": "Malaysian Heritage Food",
-        "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80"
+        "images": [
+          "/images/madam-kwans-1.jpg",
+          "/images/madam-kwans-2.jpg",
+          "/images/madam-kwans-3.jpg"
+        ]
       },
       {
         "id": "rest-1b",
         "name": "Kyochon 1991 (Suria KLCC)",
         "rating": 4.5,
         "cuisine": "Korean Fried Chicken",
-        "image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=400&q=80"
+        "images": [
+          "/images/kyochon-1.jpg",
+          "/images/kyochon-2.jpg",
+          "/images/kyochon-3.jpg"
+        ]
       }
     ]
   },
@@ -28,24 +40,36 @@
     "id": "spot-2",
     "name": "Petaling Street (Chinatown)",
     "category": "attraction",
-    "rating": 4.2,
-    "image": "https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?auto=format&fit=crop&w=600&q=80",
-    "description": "A bustling market district famous for its vibrant street food stalls, shopping bargains, and deep cultural heritage.",
+    "rating": 4.4,
+    "images": [
+      "/images/petaling-1.jpg", 
+      "/images/petaling-2.jpg", 
+      "/images/petaling-3.jpg"
+    ],
+    "description": "A bustling market district famous for vibrant street food stalls, shopping bargains, and deep cultural heritage.",
     "mapsUrl": "https://maps.google.com/?q=Petaling+Street",
     "nearbyRestaurants": [
       {
         "id": "rest-2a",
         "name": "Merchant's Lane Cafe",
         "rating": 4.4,
-        "cuisine": "Artisan Coffee & Local Fusion",
-        "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=400&q=80"
+        "cuisine": "Artisan Coffee & Fusion",
+        "images": [
+          "/images/merchants-lane-1.jpg",
+          "/images/merchants-lane-2.jpg",
+          "/images/merchants-lane-3.jpg"
+        ]
       },
       {
         "id": "rest-2b",
         "name": "Koon Kee Wantan Mee",
-        "rating": 4.1,
+        "rating": 4.2,
         "cuisine": "Legendary Local Noodles",
-        "image": "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=400&q=80"
+        "images": [
+          "/images/koon-kee-1.jpg",
+          "/images/koon-kee-2.jpg",
+          "/images/koon-kee-3.jpg"
+        ]
       }
     ]
   },
@@ -54,66 +78,166 @@
     "name": "Batu Caves",
     "category": "attraction",
     "rating": 4.6,
-    "image": "https://images.unsplash.com/photo-1629117621151-50e82ec4f179?auto=format&fit=crop&w=600&q=80",
-    "description": "A majestic limestone hill featuring ancient cave temples and guarded by the iconic giant gold statue of Lord Murugan.",
+    "images": [
+      "/images/batu-caves-1.jpg", 
+      "/images/batu-caves-2.jpg", 
+      "/images/batu-caves-3.jpg"
+    ],
+    "description": "A majestic limestone hill featuring ancient cave temples, guarded by the iconic giant gold statue of Lord Murugan.",
     "mapsUrl": "https://maps.google.com/?q=Batu+Caves",
     "nearbyRestaurants": [
       {
         "id": "rest-3a",
-        "name": "Restoran Dhivya's Cafe",
+        "name": "Dhivya's Cafe",
         "rating": 4.2,
-        "cuisine": "Authentic South Indian Banana Leaf",
-        "image": "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=400&q=80"
+        "cuisine": "South Indian Banana Leaf",
+        "images": [
+          "/images/dhivyas-1.jpg",
+          "/images/dhivyas-2.jpg",
+          "/images/dhivyas-3.jpg"
+        ]
       },
       {
         "id": "rest-3b",
         "name": "Pan Heong Restoran",
         "rating": 4.3,
-        "cuisine": "Famous Sang Har Mee (Prawn Noodles)",
-        "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=400&q=80"
+        "cuisine": "Famous Sang Har Mee",
+        "images": [
+          "/images/pan-heong-1.jpg",
+          "/images/pan-heong-2.jpg",
+          "/images/pan-heong-3.jpg"
+        ]
       }
     ]
   },
   {
     "id": "spot-4",
-    "name": "Bukit Bintang (Pavilion KL)",
+    "name": "Central Market (Pasar Seni)",
     "category": "attraction",
-    "rating": 4.7,
-    "image": "https://images.unsplash.com/photo-1596422846543-75c6fc1f7f43?auto=format&fit=crop&w=600&q=80",
-    "description": "The trendiest fashion and entertainment district in town, packed with massive shopping malls and lively street performances.",
+    "rating": 4.5,
+    "images": [
+      "/images/central-market-1.jpg", 
+      "/images/central-market-2.jpg",
+      "/images/central-market-3.jpg"
+    ],
+    "description": "KL's cultural hub for Malaysian arts, crafts, and souvenirs, housed in a beautiful Art Deco heritage building.",
     "mapsUrl": "https://maps.google.com/?q=Pavilion+Kuala+Lumpur",
     "nearbyRestaurants": [
       {
         "id": "rest-4a",
-        "name": "Din Tai Fung (Pavilion)",
-        "rating": 4.6,
-        "cuisine": "World-Famous Xiao Long Bao",
-        "image": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=400&q=80"
-      },
-      {
-        "id": "rest-4b",
-        "name": "Wong Ah Wah (Jalan Alor)",
-        "rating": 4.0,
-        "cuisine": "Iconic BBQ Chicken Wings & Street Food",
-        "image": "https://images.unsplash.com/photo-1527477396000-e2cb862f6fc4?auto=format&fit=crop&w=400&q=80"
+        "name": "Precious Old China",
+        "rating": 4.3,
+        "cuisine": "Authentic Nyonya Cuisine",
+        "images": [
+          "/images/precious-old-china-1.jpg",
+          "/images/precious-old-china-2.jpg",
+          "/images/precious-old-china-3.jpg"
+        ]
       }
     ]
   },
   {
     "id": "spot-5",
-    "name": "Perdana Botanical Garden",
+    "name": "Merdeka Square (Dataran Merdeka)",
     "category": "attraction",
-    "rating": 4.4,
-    "image": "https://images.unsplash.com/photo-1588880331179-bc9b93a8c5d8?auto=format&fit=crop&w=600&q=80",
-    "description": "KL's premier heritage park, offering peaceful lakes, lush green lawns, and beautiful botanical collections right in the city center.",
+    "rating": 4.6,
+    "images": [
+      "/images/merdeka-1.jpg", 
+      "/images/merdeka-2.jpg",
+      "/images/merdeka-3.jpg"
+    ],
+    "description": "The historic heart of KL, surrounded by stunning colonial architecture like the Sultan Abdul Samad Building.",
     "mapsUrl": "https://maps.google.com/?q=Perdana+Botanical+Garden",
     "nearbyRestaurants": [
       {
         "id": "rest-5a",
-        "name": "Hornbill Restaurant & Cafe",
+        "name": "Kafe Dian",
         "rating": 4.1,
-        "cuisine": "Tropical Dining amidst Bird Park Greens",
-        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
+        "cuisine": "Traditional Local Coffee",
+        "images": [
+          "/images/kafe-dian-1.jpg",
+          "/images/kafe-dian-2.jpg",
+          "/images/kafe-dian-3.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "spot-6",
+    "name": "KL Tower (Menara KL)",
+    "category": "attraction",
+    "rating": 4.5,
+    "images": [
+      "/images/kl-tower-1.jpg", 
+      "/images/kl-tower-2.jpg",
+      "/images/kl-tower-3.jpg"
+    ],
+    "description": "Offers an incredible 360-degree panoramic view of the city from its open-air sky deck.",
+    "mapsUrl": "https://www.google.com/maps/place/?q=place_id",
+    "ticketUrl": "https://www.menarakl.com.my/",
+    "nearbyRestaurants": [
+      {
+        "id": "rest-6a",
+        "name": "ARAS Restaurant",
+        "rating": 4.4,
+        "cuisine": "Revolving Buffet in the Sky",
+        "images": [
+          "/images/aras-1.jpg",
+          "/images/aras-2.jpg",
+          "/images/aras-3.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "spot-7",
+    "name": "Thean Hou Temple",
+    "category": "attraction",
+    "rating": 4.7,
+    "images": [
+      "/images/thean-hou-1.jpg", 
+      "/images/thean-hou-2.jpg",
+      "/images/thean-hou-3.jpg"
+    ],
+    "description": "One of the oldest and largest temples in Southeast Asia, known for its striking red pillars and sweeping roofs.",
+    "mapsUrl": "https://www.google.com/maps/place/?q=place_id:12345",
+    "nearbyRestaurants": [
+      {
+        "id": "rest-7a",
+        "name": "Robson Heights Seafood",
+        "rating": 4.2,
+        "cuisine": "Classic Chinese Seafood",
+        "images": [
+          "/images/robson-1.jpg",
+          "/images/robson-2.jpg",
+          "/images/robson-3.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "spot-8",
+    "name": "Pink Mosque (Putra Mosque)",
+    "category": "attraction",
+    "rating": 4.8,
+    "images": [
+      "/images/pink-mosque-1.jpg", 
+      "/images/pink-mosque-2.jpg",
+      "/images/pink-mosque-3.jpg"
+    ],
+    "description": "A breathtaking rose-tinted mosque sitting beautifully on the edge of Putrajaya Lake.",
+    "mapsUrl": "https://www.google.com/maps/place/?q=place_id:YOUR_PLACE_ID",
+    "nearbyRestaurants": [
+      {
+        "id": "rest-8a",
+        "name": "Souq Putrajaya",
+        "rating": 4.0,
+        "cuisine": "Diverse Local Food Court",
+        "images": [
+          "/images/souq-1.jpg",
+          "/images/souq-2.jpg",
+          "/images/souq-3.jpg"
+        ]
       }
     ]
   }
