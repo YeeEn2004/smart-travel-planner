@@ -33,37 +33,38 @@
     ]
   },
   {
-    "id": "spot-2",
-    "name": "Petaling Street (Chinatown)",
+    "id": "spot-7",
+    "name": "Thean Hou Temple",
     "category": "attraction",
-    "rating": 4.4,
+    "rating": 4.7,
     "operatingHours": "8:00 AM - 10:00 PM",
-    "lat": 3.1440,
-    "lng": 101.6981,
+    "lat": 3.1216,
+    "lng": 101.6877,
     "images": [
-      "/images/petaling-1.jpg", 
-      "/images/petaling-2.jpg", 
-      "/images/petaling-3.jpg"
+      "/images/thean-hou-1.jpg", 
+      "/images/thean-hou-2.jpg",
+      "/images/thean-hou-3.jpg"
     ],
-    "description": "A bustling market district famous for vibrant street food stalls, shopping bargains, and deep cultural heritage.",
-    "mapsUrl": "https://maps.google.com/?q=Petaling+Street",
+    "description": "One of the oldest and largest temples in Southeast Asia, known for its striking red pillars and sweeping roofs.",
+    "mapsUrl": "https://maps.google.com/?q=Thean+Hou+Temple",
     "nearbyRestaurants": [
       {
-        "id": "rest-2a",
-        "name": "Merchant's Lane Cafe",
-        "rating": 4.4,
-        "cuisine": "Artisan Coffee & Fusion",
-        "operatingHours": "11:30 AM - 9:30 PM (Closed Wednesdays)",
-        "lat": 3.1420,
-        "lng": 101.6980,
+        "id": "rest-7a",
+        "name": "Robson Heights Seafood",
+        "rating": 4.2,
+        "cuisine": "Classic Chinese Seafood",
+        "operatingHours": "11:30 AM - 2:30 PM, 5:30 PM - 10:00 PM",
+        "lat": 3.1220,
+        "lng": 101.6880,
         "images": [
-          "/images/merchants-lane-1.jpg",
-          "/images/merchants-lane-2.jpg",
-          "/images/merchants-lane-3.jpg"
+          "/images/robson-1.jpg",
+          "/images/robson-2.jpg",
+          "/images/robson-3.jpg"
         ]
       }
     ]
   },
+
   {
     "id": "spot-3",
     "name": "Batu Caves",
@@ -194,33 +195,33 @@
     ]
   },
   {
-    "id": "spot-7",
-    "name": "Thean Hou Temple",
+    "id": "spot-2",
+    "name": "Petaling Street (Chinatown)",
     "category": "attraction",
-    "rating": 4.7,
+    "rating": 4.4,
     "operatingHours": "8:00 AM - 10:00 PM",
-    "lat": 3.1216,
-    "lng": 101.6877,
+    "lat": 3.1440,
+    "lng": 101.6981,
     "images": [
-      "/images/thean-hou-1.jpg", 
-      "/images/thean-hou-2.jpg",
-      "/images/thean-hou-3.jpg"
+      "/images/petaling-1.jpg", 
+      "/images/petaling-2.jpg", 
+      "/images/petaling-3.jpg"
     ],
-    "description": "One of the oldest and largest temples in Southeast Asia, known for its striking red pillars and sweeping roofs.",
-    "mapsUrl": "https://maps.google.com/?q=Thean+Hou+Temple",
+    "description": "A bustling market district famous for vibrant street food stalls, shopping bargains, and deep cultural heritage.",
+    "mapsUrl": "https://maps.google.com/?q=Petaling+Street",
     "nearbyRestaurants": [
       {
-        "id": "rest-7a",
-        "name": "Robson Heights Seafood",
-        "rating": 4.2,
-        "cuisine": "Classic Chinese Seafood",
-        "operatingHours": "11:30 AM - 2:30 PM, 5:30 PM - 10:00 PM",
-        "lat": 3.1220,
-        "lng": 101.6880,
+        "id": "rest-2a",
+        "name": "Merchant's Lane Cafe",
+        "rating": 4.4,
+        "cuisine": "Artisan Coffee & Fusion",
+        "operatingHours": "11:30 AM - 9:30 PM (Closed Wednesdays)",
+        "lat": 3.1420,
+        "lng": 101.6980,
         "images": [
-          "/images/robson-1.jpg",
-          "/images/robson-2.jpg",
-          "/images/robson-3.jpg"
+          "/images/merchants-lane-1.jpg",
+          "/images/merchants-lane-2.jpg",
+          "/images/merchants-lane-3.jpg"
         ]
       }
     ]

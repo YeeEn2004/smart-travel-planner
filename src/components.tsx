@@ -44,71 +44,30 @@ export const ImageCarousel = ({ images }: { images: string[] }) => {
   );
 };
 
-// 3. Dynamic Travel Connector Component (Now Powered by OSRM API!)
+// 3. Dynamic Travel Connector Component (Hyper-Realistic Math)
 export const TravelConnector = ({ prevItem, currentItem }: { prevItem: any, currentItem: any }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedMode, setSelectedMode] = useState(currentItem.timelineType === 'restaurant' ? 'walk' : 'drive');
+
+  const distanceKm = calculateDistanceKm(prevItem.lat, prevItem.lng, currentItem.lat, currentItem.lng);
   
-  // NEW: State to hold real API data and loading status
-  const [routeData, setRouteData] = useState<{ drive: any, walk: any }>({ drive: null, walk: null });
-  const [isLoading, setIsLoading] = useState(true);
-
-  React.useEffect(() => {
-    const fetchRoutes = async () => {
-      setIsLoading(true);
-      try {
-        // OSRM requires coordinates in Longitude, Latitude order
-        const coords = `${prevItem.lng},${prevItem.lat};${currentItem.lng},${currentItem.lat}`;
-
-        // Fetch real road data simultaneously
-        const [driveRes, walkRes] = await Promise.all([
-          fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=false`),
-          fetch(`https://router.project-osrm.org/route/v1/foot/${coords}?overview=false`)
-        ]);
-
-        const driveJson = await driveRes.json();
-        const walkJson = await walkRes.json();
-
-        setRouteData({
-          drive: driveJson.routes?.[0] || null,
-          walk: walkJson.routes?.[0] || null
-        });
-      } catch (error) {
-        console.error("OSRM Routing API failed, falling back to math:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchRoutes();
-  }, [prevItem, currentItem]);
-
-  // Helper function to process API data or fallback to math
-  const getRouteInfo = (apiRoute: any, fallbackSpeedKmH: number) => {
-    if (apiRoute) {
-      // API returns duration in seconds and distance in meters
-      const mins = Math.max(1, Math.round(apiRoute.duration / 60));
-      const distKm = apiRoute.distance / 1000;
-      const displayDist = distKm < 1 ? `${Math.round(apiRoute.distance)}m` : `${distKm.toFixed(1)}km`;
-      return { mins, displayDist, distKm };
-    }
+  // Real-world urban travel logic
+  const walkMins = Math.max(1, Math.round((distanceKm / 5) * 60));
+  
+  // If under 200m, driving takes longer because of parking. Otherwise, add 5 mins buffer for traffic lights/parking!
+  const driveMins = distanceKm < 0.2 
+    ? walkMins + 3 
+    : Math.max(3, Math.round((distanceKm / 30) * 60) + 5);
     
-    // Fallback if API fails
-    const distanceKm = calculateDistanceKm(prevItem.lat, prevItem.lng, currentItem.lat, currentItem.lng);
-    const mins = Math.max(1, Math.round((distanceKm / fallbackSpeedKmH) * 60));
-    const displayDist = distanceKm < 1 ? `${Math.round(distanceKm * 1000)}m` : `${distanceKm.toFixed(1)}km`;
-    return { mins, displayDist, distKm: distanceKm };
-  };
+  // Trains have waiting times at the station, so we add a 15 min buffer
+  const transitMins = Math.max(10, Math.round((distanceKm / 40) * 60) + 15); 
 
-  const driveInfo = getRouteInfo(routeData.drive, 30);
-  const walkInfo = getRouteInfo(routeData.walk, 5);
-  // OSRM doesn't track public transit, so we calculate it relative to the real road distance
-  const transitMins = Math.max(1, Math.round((driveInfo.distKm / 40) * 60) + 10); 
+  const displayDist = distanceKm < 1 ? `${Math.round(distanceKm * 1000)}m` : `${distanceKm.toFixed(1)}km`;
 
   const options = [
-    { mode: 'drive', icon: '🚗', label: isLoading ? '...' : `${driveInfo.mins} mins drive`, dist: driveInfo.displayDist },
-    { mode: 'transit', icon: '🚆', label: isLoading ? '...' : `${transitMins} mins train`, dist: driveInfo.displayDist },
-    { mode: 'walk', icon: '🚶', label: isLoading ? '...' : `${walkInfo.mins} mins walk`, dist: walkInfo.displayDist }
+    { mode: 'drive', icon: '🚗', label: `${driveMins} mins drive` },
+    { mode: 'transit', icon: '🚆', label: `${transitMins} mins train` },
+    { mode: 'walk', icon: '🚶', label: `${walkMins} mins walk` }
   ];
 
   const activeOption = options.find(o => o.mode === selectedMode) || options[0];
@@ -118,15 +77,14 @@ export const TravelConnector = ({ prevItem, currentItem }: { prevItem: any, curr
       <div className="relative">
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          disabled={isLoading}
-          className={`flex items-center gap-1.5 text-xs font-bold text-slate-600 bg-white px-2.5 py-1 rounded-full border border-slate-200 shadow-sm transition ${isLoading ? 'opacity-70 cursor-wait' : 'hover:bg-slate-50'}`}
+          className="flex items-center gap-1.5 text-xs font-bold text-slate-600 bg-white px-2.5 py-1 rounded-full border border-slate-200 shadow-sm hover:bg-slate-50 transition"
         >
           {activeOption.icon} {activeOption.label} 
-          {!isLoading && <span className="text-slate-400 font-medium ml-1">({activeOption.dist})</span>}
+          <span className="text-slate-400 font-medium ml-1">({displayDist})</span>
           <span className="text-[10px] ml-1">▼</span>
         </button>
 
-        {isOpen && !isLoading && (
+        {isOpen && (
           <div className="absolute top-full left-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-lg overflow-hidden z-20 w-44">
             {options.map((opt) => (
               <button
@@ -137,7 +95,7 @@ export const TravelConnector = ({ prevItem, currentItem }: { prevItem: any, curr
                 }}
                 className={`w-full text-left px-3 py-2 text-xs font-medium hover:bg-blue-50 transition ${selectedMode === opt.mode ? 'bg-blue-50 text-blue-600' : 'text-slate-600'}`}
               >
-                {opt.icon} {opt.label} <span className="text-slate-400 opacity-70">({opt.dist})</span>
+                {opt.icon} {opt.label} <span className="text-slate-400 opacity-70">({displayDist})</span>
               </button>
             ))}
           </div>
