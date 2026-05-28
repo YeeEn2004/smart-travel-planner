@@ -37,7 +37,10 @@ const topTrendingRestaurants: Restaurant[] = [
     operatingHours: "6:30 AM - 5:30 PM",
     lat: 3.1345,
     lng: 101.6221,
-    images: ["/images/village-park-1.jpg", "/images/village-park-2.jpg"]
+    images: [
+        "/images/village-park-1.jpg",
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80"
+    ]
   },
   {
     id: "trend-2",
@@ -47,7 +50,10 @@ const topTrendingRestaurants: Restaurant[] = [
     operatingHours: "4:00 PM - 2:00 AM",
     lat: 3.1458,
     lng: 101.7086,
-    images: ["/images/waw-1.jpg", "/images/waw-2.jpg"]
+    images: [
+      "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80", 
+      "https://images.unsplash.com/photo-1527477396000-e2cb862f6fc4?auto=format&fit=crop&w=600&q=80"
+    ]
   },
   {
     id: "trend-3",
@@ -57,7 +63,10 @@ const topTrendingRestaurants: Restaurant[] = [
     operatingHours: "10:00 AM - 8:00 PM",
     lat: 3.1430,
     lng: 101.6970,
-    images: ["/images/lai-foong-1.jpg", "/images/lai-foong-2.jpg"]
+    images: [
+      "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80", 
+      "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80"
+    ]
   },
   {
     id: "trend-4",
@@ -67,10 +76,12 @@ const topTrendingRestaurants: Restaurant[] = [
     operatingHours: "Open 24 Hours",
     lat: 3.1590,
     lng: 101.7082,
-    images: ["/images/pelita-1.jpg", "/images/pelita-2.jpg"]
+    images: [
+      "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=600&q=80", 
+      "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=600&q=80"
+    ]
   }
 ];
-
 export default function App() {
   const [hasStarted, setHasStarted] = useState(false);
   const [searchCity, setSearchCity] = useState('');
