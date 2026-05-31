@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import travelData from './data.json';
+import appData from './data.json';
 import { ImageCarousel, TravelConnector, calculateDistanceKm } from './components';
+
+// 1. Instantly pull our flattened arrays from JSON
+const travelData: TravelSpot[] = appData.attractions as TravelSpot[];
+const generalRestaurants: Restaurant[] = appData.restaurants as Restaurant[];
 
 interface Restaurant {
   id: string;
@@ -25,66 +29,15 @@ interface TravelSpot {
   ticketUrl?: string;
   lat: number;
   lng: number;
-  nearbyRestaurants: Restaurant[];
+  // 🗑️ nearbyRestaurants has been cleanly removed from here!
 }
 
-const topTrendingRestaurants: Restaurant[] = [
-  {
-    id: "trend-1",
-    name: "Village Park Restaurant",
-    rating: 4.8,
-    cuisine: "Legendary Nasi Lemak",
-    operatingHours: "6:30 AM - 5:30 PM",
-    lat: 3.1345,
-    lng: 101.6221,
-    images: [
-        "/images/village-park-1.jpg",
-      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80"
-    ]
-  },
-  {
-    id: "trend-2",
-    name: "Wong Ah Wah (W.A.W)",
-    rating: 4.6,
-    cuisine: "Famous BBQ Chicken Wings",
-    operatingHours: "4:00 PM - 2:00 AM",
-    lat: 3.1458,
-    lng: 101.7086,
-    images: [
-      "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80", 
-      "https://images.unsplash.com/photo-1527477396000-e2cb862f6fc4?auto=format&fit=crop&w=600&q=80"
-    ]
-  },
-  {
-    id: "trend-3",
-    name: "Lai Foong Lala Noodles",
-    rating: 4.7,
-    cuisine: "Michelin Bib Gourmand Clams",
-    operatingHours: "10:00 AM - 8:00 PM",
-    lat: 3.1430,
-    lng: 101.6970,
-    images: [
-      "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80", 
-      "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80"
-    ]
-  },
-  {
-    id: "trend-4",
-    name: "Nasi Kandar Pelita",
-    rating: 4.3,
-    cuisine: "24-Hour Mamak Legend",
-    operatingHours: "Open 24 Hours",
-    lat: 3.1590,
-    lng: 101.7082,
-    images: [
-      "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=600&q=80", 
-      "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=600&q=80"
-    ]
-  }
-];
+// 2. Combine all restaurants into one list for the "Famous Eats" tab
+const allUniqueRestaurants = Array.from(new Map(generalRestaurants.map(r => [r.id, r])).values());
+
 export default function App() {
   const [hasStarted, setHasStarted] = useState(false);
-  const [searchCity, setSearchCity] = useState('');
+  const [searchCity, setSearchCity] = useState('Kuala Lumpur');
   
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -94,12 +47,12 @@ export default function App() {
   const [searchError, setSearchError] = useState('');
 
   const [itinerary, setItinerary] = useState<any[]>([]);
-  const [lastSelectedSpot, setLastSelectedSpot] = useState<TravelSpot | null>(null);
   const [modalItem, setModalItem] = useState<any | null>(null);
-  const [showFoodBanner, setShowFoodBanner] = useState(true);
+  
+  const [leftTab, setLeftTab] = useState<'attractions' | 'food'>('attractions');
 
-  // NEW: State for dragging items
   const [draggedId, setDraggedId] = useState<string | null>(null);
+  const [showToast, setShowToast] = useState(false);
 
   const currentDayItinerary = itinerary.filter(item => item.day === currentDay);
 
@@ -152,13 +105,6 @@ export default function App() {
     };
     
     setItinerary([...itinerary, newItem]);
-
-    if (type === 'attraction') {
-      setLastSelectedSpot(item);
-      setShowFoodBanner(true); 
-    } else {
-      setShowFoodBanner(false); 
-    }
   };
 
   const handleRemoveItem = (uniqueId: string) => {
@@ -167,12 +113,11 @@ export default function App() {
 
   const handleReset = () => {
     setItinerary([]);
-    setLastSelectedSpot(null);
-    setShowFoodBanner(true);
     setHasStarted(false);
-    setSearchCity('');
+    setSearchCity('Kuala Lumpur');
     setStartDate('');
     setEndDate('');
+    setLeftTab('attractions');
   };
 
   const handleExportMaps = () => {
@@ -182,15 +127,12 @@ export default function App() {
     window.open(baseUrl + path, '_blank');
   };
 
-  // NEW: Smart Route Organizer
   const handleOptimizeRoute = () => {
     if (currentDayItinerary.length <= 2) return; 
 
-    // Keep the very first place as the starting point
     const optimized = [currentDayItinerary[0]];
     const unvisited = currentDayItinerary.slice(1);
 
-    // Loop through and find the closest next stop
     while (unvisited.length > 0) {
       let lastItem = optimized[optimized.length - 1];
       let closestIndex = 0;
@@ -203,17 +145,18 @@ export default function App() {
           closestIndex = i;
         }
       }
-      
-      // Move the closest item from unvisited to optimized
       optimized.push(unvisited.splice(closestIndex, 1)[0]);
     }
 
-    // Update the main list without touching other days
     const otherDays = itinerary.filter(item => item.day !== currentDay);
     setItinerary([...otherDays, ...optimized]);
+    
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3500);
   };
 
-  // NEW: Drag and Drop functions
   const handleDragStart = (e: React.DragEvent, id: string) => {
     setDraggedId(id);
     e.dataTransfer.effectAllowed = "move";
@@ -227,18 +170,16 @@ export default function App() {
     const draggedIndex = currentDayItems.findIndex(i => i.uniqueId === draggedId);
     const targetIndex = currentDayItems.findIndex(i => i.uniqueId === targetId);
 
-    // Pull out the dragged item and put it in the new spot
     const [draggedItem] = currentDayItems.splice(draggedIndex, 1);
     currentDayItems.splice(targetIndex, 0, draggedItem);
 
-    // Save the new order
     const otherDays = itinerary.filter(item => item.day !== currentDay);
     setItinerary([...otherDays, ...currentDayItems]);
     setDraggedId(null);
   };
 
   const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault(); // Must have this for drop to work
+    e.preventDefault();
   };
 
   if (!hasStarted) {
@@ -292,15 +233,11 @@ export default function App() {
     );
   }
 
-  const displayedRestaurants = lastSelectedSpot ? lastSelectedSpot.nearbyRestaurants : topTrendingRestaurants;
-  const bannerTitle = lastSelectedSpot ? "🍔 Smart Food Recommendations" : "🔥 Trending Local Eats";
-  const bannerSubtitle = lastSelectedSpot ? `Highly rated spots near ${lastSelectedSpot.name}` : "The most legendary food spots across KL & PJ";
-
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col">
+    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col relative pb-16">
       <header className="bg-white border-b border-slate-200 py-6 px-8 flex justify-between items-center sticky top-0 z-10 shadow-sm shrink-0">
         <div>
-          <h1 className="text-2xl font-extrabold text-blue-600 tracking-tight">Kuala Lumpur Trip</h1>
+          <h1 className="text-2xl font-extrabold text-blue-600 tracking-tight capitalize">{searchCity} Trip</h1>
           <p className="text-sm text-slate-500 mt-0.5">Optimize your multi-day trip routes seamlessly.</p>
         </div>
         <div className="flex gap-3">
@@ -312,22 +249,80 @@ export default function App() {
 
       <main className="max-w-7xl mx-auto p-4 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-1 overflow-hidden">
         
+        {/* LEFT COLUMN: Toggles between Attractions and Food */}
         <section className="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm overflow-y-auto" style={{ maxHeight: 'calc(100vh - 140px)'}}>
           
-          {showFoodBanner && (
-            <div className="mb-8 bg-orange-50/70 border border-orange-200 p-5 rounded-2xl shadow-inner animate-fade-in">
-              <div className="flex justify-between items-end mb-4">
-                <div>
-                  <h2 className="text-lg font-bold tracking-tight text-orange-700">{bannerTitle}</h2>
-                  <p className="text-xs text-orange-600/80 mt-0.5">{bannerSubtitle}</p>
-                </div>
-                <button onClick={() => setShowFoodBanner(false)} className="text-xs font-medium text-slate-500 hover:text-slate-700 underline">
-                  Dismiss
-                </button>
+          {/* The Tab Toggle Menu */}
+          <div className="flex bg-slate-100 p-1.5 rounded-xl mb-6 sticky top-0 z-10">
+            <button 
+              onClick={() => setLeftTab('attractions')}
+              className={`flex-1 py-2.5 rounded-lg text-sm font-bold transition-all ${leftTab === 'attractions' ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+            >
+              📸 Attractions
+            </button>
+            <button 
+              onClick={() => setLeftTab('food')}
+              className={`flex-1 py-2.5 rounded-lg text-sm font-bold transition-all ${leftTab === 'food' ? 'bg-white shadow-sm text-orange-600' : 'text-slate-500 hover:text-slate-700'}`}
+            >
+              🍜 Famous Eats
+            </button>
+          </div>
+
+          {/* VIEW 1: ATTRACTIONS */}
+          {leftTab === 'attractions' && (
+            <div className="animate-fade-in">
+              <div className="mb-4">
+                <h2 className="text-xl font-bold tracking-tight">Top Attractions</h2>
+                <p className="text-sm text-slate-500">Add places to build your daily schedule.</p>
               </div>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {displayedRestaurants.map((restaurant: Restaurant) => {
+                {travelData.map((spot: TravelSpot) => {
+                  const isAdded = currentDayItinerary.some(i => i.id === spot.id);
+
+                  return (
+                    <div key={spot.id} className="group border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition bg-white flex flex-col justify-between">
+                      <div className="cursor-pointer" onClick={() => setModalItem(spot)}>
+                        <ImageCarousel images={spot.images} />
+                        <div className="p-4">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs font-semibold px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full">Attraction</span>
+                            <span className="text-sm font-bold text-amber-500">⭐ {spot.rating}</span>
+                          </div>
+                          <h3 className="font-bold text-base leading-snug line-clamp-1">{spot.name}</h3>
+                          {spot.operatingHours && (
+                            <p className="text-xs text-slate-500 mt-1 font-medium">🕒 {spot.operatingHours}</p>
+                          )}
+                          <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">{spot.description}</p>
+                        </div>
+                      </div>
+                      <div className="p-4 pt-0">
+                        <button 
+                          onClick={() => !isAdded && handleAddItem(spot, 'attraction')} 
+                          disabled={isAdded}
+                          className={`w-full text-white text-sm font-semibold py-2 rounded-lg transition shadow-sm ${
+                            isAdded ? 'bg-slate-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+                          }`}
+                        >
+                          {isAdded ? '✓ Added to Day ' + currentDay : '+ Add to Itinerary'}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* VIEW 2: FOOD ONLY */}
+          {leftTab === 'food' && (
+            <div className="animate-fade-in pb-8">
+              <div className="mb-4">
+                <h2 className="text-xl font-bold tracking-tight text-orange-800">🍜 Famous Local Eats</h2>
+                <p className="text-sm text-slate-500">Legendary spots across KL.</p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {allUniqueRestaurants.map((restaurant: Restaurant) => {
                   const isAdded = currentDayItinerary.some(i => i.id === restaurant.id);
                   
                   return (
@@ -337,7 +332,7 @@ export default function App() {
                         <div className="p-4">
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-xs font-semibold px-2 py-0.5 bg-orange-50 text-orange-600 rounded-full">{restaurant.cuisine}</span>
-                            <span className="text-sm font-bold text-amber-500">⭐ {restaurant.rating}</span>
+                            <span className="text-sm font-bold text-amber-500 shrink-0 ml-2">⭐ {restaurant.rating}</span>
                           </div>
                           <h3 className="font-bold text-base leading-snug line-clamp-1">{restaurant.name}</h3>
                           {restaurant.operatingHours && (
@@ -353,7 +348,7 @@ export default function App() {
                             isAdded ? 'bg-slate-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'
                           }`}
                         >
-                          {isAdded ? '✓ Added to Day ' + currentDay : '+ Grab Lunch Here'}
+                          {isAdded ? '✓ Added to Day ' + currentDay : '+ Grab Food Here'}
                         </button>
                       </div>
                     </div>
@@ -362,59 +357,18 @@ export default function App() {
               </div>
             </div>
           )}
-
-          <div className="mb-6">
-            <h2 className="text-xl font-bold tracking-tight">Top Attractions</h2>
-            <p className="text-sm text-slate-500">Pick a place to continue your adventure.</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {travelData.map((spot: TravelSpot) => {
-              const isAdded = currentDayItinerary.some(i => i.id === spot.id);
-
-              return (
-                <div key={spot.id} className="group border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition bg-white flex flex-col justify-between">
-                  <div className="cursor-pointer" onClick={() => setModalItem(spot)}>
-                    <ImageCarousel images={spot.images} />
-                    <div className="p-4">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs font-semibold px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full">Attraction</span>
-                        <span className="text-sm font-bold text-amber-500">⭐ {spot.rating}</span>
-                      </div>
-                      <h3 className="font-bold text-base leading-snug line-clamp-1">{spot.name}</h3>
-                      {spot.operatingHours && (
-                        <p className="text-xs text-slate-500 mt-1 font-medium">🕒 {spot.operatingHours}</p>
-                      )}
-                      <p className="text-xs text-slate-500 mt-1.5 line-clamp-2">{spot.description}</p>
-                    </div>
-                  </div>
-                  <div className="p-4 pt-0">
-                    <button 
-                      onClick={() => !isAdded && handleAddItem(spot, 'attraction')} 
-                      disabled={isAdded}
-                      className={`w-full text-white text-sm font-semibold py-2 rounded-lg transition shadow-sm ${
-                        isAdded ? 'bg-slate-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
-                      }`}
-                    >
-                      {isAdded ? '✓ Added to Day ' + currentDay : '+ Add to Itinerary'}
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </section>
 
+        {/* RIGHT COLUMN: The Itinerary */}
         <section className="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col overflow-hidden" style={{ maxHeight: 'calc(100vh - 140px)'}}>
           
           <div className="mb-6">
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-xl font-bold tracking-tight">My Itinerary</h2>
-              {/* NEW: The Smart Route Button */}
               {currentDayItinerary.length > 2 && (
                 <button 
                   onClick={handleOptimizeRoute}
-                  className="text-xs bg-indigo-50 text-indigo-600 border border-indigo-200 px-3 py-1.5 rounded-lg font-bold hover:bg-indigo-100 transition shadow-sm"
+                  className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-lg font-bold hover:bg-emerald-100 transition shadow-sm"
                 >
                   ✨ Optimize Route
                 </button>
@@ -442,22 +396,25 @@ export default function App() {
             {currentDayItinerary.length === 0 ? (
               <div className="h-48 flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-xl p-4 text-center mt-4">
                 <p className="text-sm text-slate-400 font-medium">Your schedule for Day {currentDay} is open.</p>
-                <p className="text-xs text-slate-400 mt-1">Select a spot on the left to map this day.</p>
+                <p className="text-xs text-slate-400 mt-1">Select places on the left to map this day.</p>
               </div>
             ) : (
-              <div className="relative border-l-2 border-blue-500 ml-4 pl-6 pt-2 pb-2">
+              <div className="relative border-l-2 border-slate-300 ml-4 pl-6 pt-2 pb-2">
                 {currentDayItinerary.map((item, index) => (
                   <div 
                     key={item.uniqueId} 
                     className="relative mb-8"
-                    // NEW: HTML Drag attributes
                     draggable
                     onDragStart={(e) => handleDragStart(e, item.uniqueId)}
                     onDragOver={handleDragOver}
                     onDrop={(e) => handleDrop(e, item.uniqueId)}
                   >
                     {index > 0 && <TravelConnector prevItem={currentDayItinerary[index - 1]} currentItem={item} />}
-                    <span className={`absolute -left-[31px] top-1.5 h-4 w-4 rounded-full border-2 border-white shadow-sm ${item.timelineType === 'attraction' ? 'bg-blue-600' : 'bg-orange-500'}`}></span>
+                    
+                    {/* Smart color-coding for Timeline dots */}
+                    <span className={`absolute -left-[31px] top-1.5 h-4 w-4 rounded-full border-2 border-white shadow-sm ${
+                      item.timelineType === 'attraction' ? 'bg-blue-600' : 'bg-orange-500'
+                    }`}></span>
                     
                     <div className={`p-4 rounded-xl border shadow-sm cursor-grab active:cursor-grabbing transition-colors ${
                         draggedId === item.uniqueId ? 'opacity-50 bg-slate-100 border-dashed' : 
@@ -493,7 +450,7 @@ export default function App() {
             <div className="mt-4 pt-4 border-t border-slate-200 shrink-0">
               <button 
                 onClick={handleExportMaps}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl shadow-md transition flex justify-center items-center gap-2"
+                className="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl shadow-md transition flex justify-center items-center gap-2"
               >
                 🗺️ Open Day {currentDay} Route in Maps
               </button>
@@ -502,7 +459,15 @@ export default function App() {
         </section>
       </main>
 
-      {/* MODAL POP-UP */}
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-slate-900/95 backdrop-blur-sm border border-slate-700 text-white px-6 py-3.5 rounded-full shadow-2xl flex items-center gap-3 z-50 transition-all">
+          <span className="text-xl">✨</span>
+          <span className="text-sm font-bold tracking-wide">Route optimized for shortest distance!</span>
+        </div>
+      )}
+
+      {/* Modal */}
       {modalItem && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
           <div className="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl relative">
