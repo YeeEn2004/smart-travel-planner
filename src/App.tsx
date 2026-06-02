@@ -29,10 +29,8 @@ interface TravelSpot {
   ticketUrl?: string;
   lat: number;
   lng: number;
-  // 🗑️ nearbyRestaurants has been cleanly removed from here!
 }
 
-// 2. Combine all restaurants into one list for the "Famous Eats" tab
 const allUniqueRestaurants = Array.from(new Map(generalRestaurants.map(r => [r.id, r])).values());
 
 export default function App() {
@@ -50,7 +48,6 @@ export default function App() {
   const [modalItem, setModalItem] = useState<any | null>(null);
   
   const [leftTab, setLeftTab] = useState<'attractions' | 'food'>('attractions');
-
   const [draggedId, setDraggedId] = useState<string | null>(null);
   const [showToast, setShowToast] = useState(false);
 
@@ -95,11 +92,14 @@ export default function App() {
   };
 
   const handleAddItem = (item: any, type: 'attraction' | 'restaurant') => {
-    const timeSlots = ["09:00 AM", "12:30 PM", "03:00 PM", "06:00 PM", "08:30 PM"];
+    const defaultTimes = ["09:00", "12:30", "15:00", "18:00", "20:30"];
+    const startingTime = defaultTimes[currentDayItinerary.length] || "22:00"; 
+
     const newItem = {
       ...item,
       timelineType: type,
-      timeSlot: timeSlots[currentDayItinerary.length] || "Late Night",
+      customTime: startingTime, 
+      note: '',       
       uniqueId: Math.random().toString(),
       day: currentDay 
     };
@@ -109,6 +109,12 @@ export default function App() {
 
   const handleRemoveItem = (uniqueId: string) => {
     setItinerary(itinerary.filter(item => item.uniqueId !== uniqueId));
+  };
+
+  const handleUpdateItemDetails = (uniqueId: string, field: 'customTime' | 'note', value: string) => {
+    setItinerary(itinerary.map(item => 
+      item.uniqueId === uniqueId ? { ...item, [field]: value } : item
+    ));
   };
 
   const handleReset = () => {
@@ -157,6 +163,7 @@ export default function App() {
     }, 3500);
   };
 
+  // Drag and Drop Logic
   const handleDragStart = (e: React.DragEvent, id: string) => {
     setDraggedId(id);
     e.dataTransfer.effectAllowed = "move";
@@ -252,7 +259,6 @@ export default function App() {
         {/* LEFT COLUMN: Toggles between Attractions and Food */}
         <section className="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm overflow-y-auto" style={{ maxHeight: 'calc(100vh - 140px)'}}>
           
-          {/* The Tab Toggle Menu */}
           <div className="flex bg-slate-100 p-1.5 rounded-xl mb-6 sticky top-0 z-10">
             <button 
               onClick={() => setLeftTab('attractions')}
@@ -268,7 +274,6 @@ export default function App() {
             </button>
           </div>
 
-          {/* VIEW 1: ATTRACTIONS */}
           {leftTab === 'attractions' && (
             <div className="animate-fade-in">
               <div className="mb-4">
@@ -314,7 +319,6 @@ export default function App() {
             </div>
           )}
 
-          {/* VIEW 2: FOOD ONLY */}
           {leftTab === 'food' && (
             <div className="animate-fade-in pb-8">
               <div className="mb-4">
@@ -404,14 +408,14 @@ export default function App() {
                   <div 
                     key={item.uniqueId} 
                     className="relative mb-8"
-                    draggable
+                    draggable // 🔥 Drag and drop restored here!
                     onDragStart={(e) => handleDragStart(e, item.uniqueId)}
                     onDragOver={handleDragOver}
                     onDrop={(e) => handleDrop(e, item.uniqueId)}
                   >
+                    
                     {index > 0 && <TravelConnector prevItem={currentDayItinerary[index - 1]} currentItem={item} />}
                     
-                    {/* Smart color-coding for Timeline dots */}
                     <span className={`absolute -left-[31px] top-1.5 h-4 w-4 rounded-full border-2 border-white shadow-sm ${
                       item.timelineType === 'attraction' ? 'bg-blue-600' : 'bg-orange-500'
                     }`}></span>
@@ -421,15 +425,28 @@ export default function App() {
                         item.timelineType === 'attraction' ? 'border-slate-200 bg-slate-50 hover:bg-slate-100' : 'border-orange-100 bg-orange-50/30 hover:bg-orange-50/70'
                       }`}
                     >
-                      <div className="flex justify-between items-start mb-1">
-                        <span className="text-xs font-bold text-slate-400 tracking-wide uppercase flex items-center gap-1">
-                          <span className="text-slate-300">↕️</span> {item.timeSlot}
-                        </span>
+                      <div className="flex justify-between items-start mb-2">
+                        
+                        {/* Custom Time Input */}
+                        <div 
+                          draggable 
+                          onDragStart={(e) => { e.preventDefault(); e.stopPropagation(); }} // 🔥 Stops the drag from blocking the click!
+                          className="flex items-center gap-1.5 bg-white px-2 py-1 rounded-md border border-slate-200 shadow-sm cursor-text"
+                        >
+                          <span className="text-slate-400 text-sm">🕒</span>
+                          <input 
+                            type="time" 
+                            value={item.customTime}
+                            onChange={(e) => handleUpdateItemDetails(item.uniqueId, 'customTime', e.target.value)}
+                            className="bg-transparent border-none text-xs font-bold text-slate-700 focus:ring-0 outline-none cursor-text p-0"
+                          />
+                        </div>
+                        
                         <div className="flex gap-3 items-center">
                           <span className="text-xs text-amber-500 font-bold">⭐ {item.rating}</span>
                           <button 
                             onClick={() => handleRemoveItem(item.uniqueId)} 
-                            className="w-7 h-7 flex items-center justify-center rounded-full bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600 transition-all shadow-sm" 
+                            className="w-7 h-7 flex items-center justify-center rounded-full bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600 transition-all shadow-sm cursor-pointer z-10" 
                             title="Remove from itinerary"
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -438,7 +455,24 @@ export default function App() {
                           </button>
                         </div>
                       </div>
-                      <h4 className="font-bold text-slate-800 text-base leading-tight">{item.name}</h4>
+                      
+                      <h4 className="font-bold text-slate-800 text-base leading-tight mb-3">{item.name}</h4>
+                      
+                      {/* Custom Note Input */}
+                      <div 
+                        draggable 
+                        onDragStart={(e) => { e.preventDefault(); e.stopPropagation(); }} // 🔥 Stops the drag from blocking the click!
+                        className="flex items-center gap-2 bg-white/80 p-2 rounded-lg border border-slate-200/60 shadow-inner cursor-text"
+                      >
+                        <span className="text-slate-400 text-xs">📝</span>
+                        <input 
+                          type="text" 
+                          placeholder="Add notes, reservation #, or links..."
+                          value={item.note}
+                          onChange={(e) => handleUpdateItemDetails(item.uniqueId, 'note', e.target.value)}
+                          className="w-full bg-transparent border-none text-xs text-slate-600 focus:ring-0 outline-none placeholder:text-slate-400"
+                        />
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -452,7 +486,7 @@ export default function App() {
                 onClick={handleExportMaps}
                 className="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl shadow-md transition flex justify-center items-center gap-2"
               >
-                🗺️ Open Day {currentDay} Route in Maps
+                 Open Day {currentDay} Route in Maps
               </button>
             </div>
           )}
